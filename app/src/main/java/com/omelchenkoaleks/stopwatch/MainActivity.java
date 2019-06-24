@@ -44,20 +44,16 @@ public class MainActivity extends AppCompatActivity {
         outState.putBoolean("wasRunning", wasRunning);
     }
 
-    // переопределяем его, чтобы остановить таймер,
-    // когда активность переходит в невидимое состояние
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         wasRunning = isRunning;
         isRunning = false;
     }
 
-    // переопределяем метод, чтобы запустить снова таймер,
-    // когда он выходит из состояния невидимости
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         isRunning = wasRunning;
     }
 

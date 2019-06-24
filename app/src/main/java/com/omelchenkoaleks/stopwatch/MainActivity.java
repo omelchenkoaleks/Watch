@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     /* переменные для отслеживания состояния секундомера */
     private int seconds = 0;
     private boolean isRunning = false;
+    private boolean wasRunning = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
             // восстанавливаем значения переменных в случае изменения ориентации экрана
             seconds = savedInstanceState.getInt("seconds");
             isRunning = savedInstanceState.getBoolean("isRunning");
+            wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
 
         mTimerTextView = findViewById(R.id.timer_text_view);
@@ -39,6 +41,24 @@ public class MainActivity extends AppCompatActivity {
         // сохраняем значение наших переменных
         outState.putInt("seconds", seconds);
         outState.putBoolean("isRunning", isRunning);
+        outState.putBoolean("wasRunning", wasRunning);
+    }
+
+    // переопределяем его, чтобы остановить таймер,
+    // когда активность переходит в невидимое состояние
+    @Override
+    protected void onStop() {
+        super.onStop();
+        wasRunning = isRunning;
+        isRunning = false;
+    }
+
+    // переопределяем метод, чтобы запустить снова таймер,
+    // когда он выходит из состояния невидимости
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isRunning = wasRunning;
     }
 
     public void onClickStartTimer(View view) {

@@ -21,9 +21,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState != null) {
+            // восстанавливаем значения переменных в случае изменения ориентации экрана
+            seconds = savedInstanceState.getInt("seconds");
+            isRunning = savedInstanceState.getBoolean("isRunning");
+        }
+
         mTimerTextView = findViewById(R.id.timer_text_view);
 
         runTimer();
+    }
+
+    // сохраняем состояние текущей активности
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // сохраняем значение наших переменных
+        outState.putInt("seconds", seconds);
+        outState.putBoolean("isRunning", isRunning);
     }
 
     public void onClickStartTimer(View view) {

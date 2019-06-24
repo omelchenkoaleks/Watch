@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/start_button"
+            android:onClick="onClickStartTimer"
             android:layout_margin="8dp"/>
 
         <Button
@@ -43,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/pause_button"
+            android:onClick="onClickStopTimer"
             android:layout_margin="8dp"/>
 
         <Button
@@ -50,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/reset_button"
+            android:onClick="onClickResetTimer"
             android:layout_margin="8dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
